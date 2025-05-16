@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aaron Razey - Game Developer Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* --- Global Styles & Variables --- */
+        :root {
+            --bg-color: #0A192F; /* Very dark blue */
+            --card-bg-color: #112240; /* Lighter dark blue for cards/modals */
+            --primary-text-color: #CCD6F6; /* Light grayish blue */
+            --secondary-text-color: #8892B0; /* Medium grayish blue */
+            --accent-color: #64FFDA; /* Bright cyan/teal */
+            --accent-hover-color: #52D9C8;
+            --border-color: #233554;
+            --shadow-color: rgba(2, 12, 27, 0.7);
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--primary-text-color);
+            line-height: 1.6;
+            font-size: 16px; /* Base font size */
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        h1, h2, h3 {
+            color: var(--accent-color);
+            margin-bottom: 0.8em;
+            font-weight: 600;
+        }
+        
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 2rem; text-align: center; margin-bottom: 1.5em; }
+        h3 { font-size: 1.5rem; }
+
+        p {
+            margin-bottom: 1em;
+            color: var(--secondary-text-color);
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-hover-color);
+        }
+
+        /* --- Header --- */
+        header {
+            padding: 40px 0;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 3px solid var(--accent-color);
+            box-shadow: 0 0 15px var(--accent-color);
+        }
+
+        header h1 {
+            margin-bottom: 0.2em;
+            font-size: 2.8rem;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--primary-text-color);
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .social-links a {
+            font-size: 1.8rem;
+            margin: 0 10px;
+            color: var(--secondary-text-color);
+        }
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* --- About Section --- */
+        #about {
+            padding: 40px 0;
+            text-align: center;
+        }
+        #about .container {
+             max-width: 800px;
+        }
+        #about h2 {
+            color: var(--primary-text-color);
+            font-weight: 400;
+            margin-bottom: 1em;
+        }
+         #about p {
+            font-size: 1.1rem;
+            color: var(--primary-text-color); /* Brighter than secondary for bio */
+        }
+
+        /* --- Games Portfolio Section --- */
+        #games-portfolio {
+            padding: 40px 0;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .game-card {
+            background-color: var(--card-bg-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 25px var(--shadow-color), 0 0 10px var(--accent-color);
+        }
+
+        .game-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .game-card-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .game-card-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .game-card-content p {
+            font-size: 0.9rem;
+            color: var(--secondary-text-color);
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+        
+        .tech-tags {
+            margin-top: auto; /* Pushes tags to the bottom if description is short */
+        }
+
+        .tech-tags .tag {
+            display: inline-block;
+            background-color: var(--bg-color);
+            color: var(--accent-color);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        /* --- Modal --- */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7); /* Dim background */
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background-color: var(--card-bg-color);
+            margin: auto;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 700px;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .modal.show .modal-content {
+            transform: scale(1);
+        }
+
+        .close-button {
+            color: var(--secondary-text-color);
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 2.5rem;
+            font-weight: bold;
+            transition: color 0.2s ease;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: var(--accent-color);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #modal-img {
+            width: 100%;
+            max-height: 350px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border: 2px solid var(--accent-color);
+        }
+
+        #modal-tech .tag {
+             display: inline-block;
+            background-color: var(--bg-color);
+            color: var(--accent-color);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-right: 8px;
+            margin-bottom: 15px;
+        }
+        
+        #modal-long-description {
+            font-size: 1rem;
+            margin-bottom: 25px;
+            color: var(--primary-text-color);
+        }
+
+        .modal-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap; /* For smaller screens */
+        }
+
+        .modal-links .button {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: inline-block; /* Ensure proper padding and centering */
+            flex-grow: 1; /* Make buttons share space */
+        }
+
+        .modal-links .button:hover {
+            background-color: var(--accent-hover-color);
+            transform: translateY(-2px);
+            color: var(--bg-color); /* Ensure text color remains on hover */
+        }
+        
+        .modal-links .button.secondary {
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+        }
+        .modal-links .button.secondary:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+        }
+
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            color: var(--secondary-text-color);
+        }
+
+        /* --- Responsive Adjustments --- */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            header h1 { font-size: 2.4rem; }
+            h2 { font-size: 1.8rem; }
+            .profile-pic { width: 120px; height: 120px; }
+            .games-grid {
+                grid-template-columns: 1fr; /* Single column on smaller screens */
+            }
+            .modal-content { padding: 20px; }
+            #modal-img { max-height: 250px; }
+            .modal-links { flex-direction: column; } /* Stack buttons vertically */
+            .modal-links .button { width: 100%; } /* Full width buttons */
+        }
+
+        @media (max-width: 480px) {
+            body { font-size: 15px; }
+            h1 { font-size: 2rem; }
+            header h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.6rem; }
+            .profile-pic { width: 100px; height: 100px; }
+            .tagline { font-size: 1rem; }
+            #about p { font-size: 1rem; }
+            .modal-content { width: 95%; }
+             #modal-long-description { font-size: 0.9rem; }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="https://i.ibb.co/PFS1B2P/pfp.jpg" alt="Aaron Razey" class="profile-pic">
+            <h1>Aaron Razey</h1>
+            <p class="tagline">From Python Scripts to Interactive Web Games.</p>
+            <div class="social-links">
+                <a href="https://github.com/aarongkr/" target="_blank" aria-label="GitHub Profile">
+                    <i class="fab fa-github"></i>
+                </a>
+                <!-- Add more social links here if you have them, e.g., LinkedIn, Itch.io -->
+                <!-- <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a> -->
+                <!-- <a href="#" target="_blank" aria-label="Itch.io"><i class="fab fa-itch-io"></i></a> -->
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="about">
+            <div class="container">
+                <h2>About Me</h2>
+                <p>
+                    Meet Aaron Razey, a 16-year-old junior developer with a passion for game creation. 
+                    His coding journey began a few years ago, collaborating with friends on a text-based Python game. 
+                    Since then, Aaron has dived into the world of web development, now skillfully using HTML, CSS, 
+                    and JavaScript to bring his engaging game ideas to life.
+                </p>
+            </div>
+        </section>
+
+        <section id="games-portfolio">
+            <div class="container">
+                <h2>My Games</h2>
+                <div class="games-grid" id="gamesGrid">
+                    <!-- Game cards will be injected here by JavaScript -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© <span id="currentYear"></span> Aaron Razey. All rights reserved.</p>
+            <p>Crafting fun, one line of code at a time.</p>
+        </div>
+    </footer>
+
+    <!-- Modal Structure -->
+    <div id="gameModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="closeModalButton">×</span>
+            <img id="modal-img" src="" alt="Game Screenshot">
+            <h3 id="modal-title"></h3>
+            <div id="modal-tech-tags" class="tech-tags"></div>
+            <p id="modal-long-description"></p>
+            <div class="modal-links">
+                <a id="modal-play-link" href="#" target="_blank" class="button">Play Game</a>
+                <a id="modal-code-link" href="#" target="_blank" class="button secondary">View Code</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Game Data ---
+            // To add a new game, copy an existing game object, paste it as a new element in the array,
+            // and update its properties (id, title, thumbnail, descriptions, links, technologies).
+            // Make sure image URLs are direct links to the image file (e.g., ending in .png, .jpg).
+            const games = [
+                {
+                    id: 'idea-engine',
+                    title: 'The Idea Engine',
+                    thumbnail: 'https://i.ibb.co/yYK3x2C/idea-engine-ss.png',
+                    shortDescription: 'Forge concepts into paradigms in this unique clicker where ideas are your currency.',
+                    longDescription: `Dive into 'The Idea Engine,' a clicker game with an intellectual twist. Instead of mere coins, you'll generate an ever-expanding stream of thoughts. Start with basic concepts, meticulously combine them to form profound insights, weave insights into groundbreaking theories, and finally, crystallize theories into revolutionary paradigms. Witness your intellectual empire take shape as these discoveries dynamically map themselves onto your personal, interactive 'noosphere,' a visual testament to your accumulated knowledge.`,
+                    playLink: 'https://aarongkr.github.io/The-Idea-Engine/',
+                    codeLink: 'https://github.com/aarongkr/The-Idea-Engine',
+                    technologies: ['HTML', 'CSS', 'JavaScript', 'vis.js']
+                },
+                {
+                    id: 'dice-tycoon',
+                    title: 'Dice Tycoon',
+                    thumbnail: 'https://i.ibb.co/f8g3g8H/dice-tycoon-ss.png',
+                    shortDescription: 'Roll high to earn high! Test your luck in this addictive dice clicker.',
+                    longDescription: `Welcome to 'Dice Tycoon,' where fortune favors the bold (and lucky!). This isn't your average clicker; here, high rolls are your ticket to riches. Strategically upgrade your odds, boost your earnings per successful roll, and watch your tycoon status soar. Can you master the dice and build your empire?`,
+                    playLink: 'https://aarongkr.github.io/dice-roller/',
+                    codeLink: 'https://github.com/aarongkr/dice-roller',
+                    technologies: ['HTML', 'CSS', 'JavaScript']
+                }
+                // Add more game objects here following the same structure
+                /*
+                {
+                    id: 'new-game', // A unique ID for the game
+                    title: 'My Awesome New Game',
+                    thumbnail: 'https://link-to-your-game-thumbnail.com/image.png',
+                    shortDescription: 'A brief, catchy description for the card.',
+                    longDescription: 'A more detailed description for the modal view. Talk about the gameplay, features, story, or your development process.',
+                    playLink: 'https://your-github-pages-link-to-play.com/',
+                    codeLink: 'https://github.com/your-username/your-game-repo',
+                    technologies: ['Tech1', 'Tech2', 'AnotherTech']
+                }
+                */
+            ];
+
+            const gamesGrid = document.getElementById('gamesGrid');
+            const modal = document.getElementById('gameModal');
+            const closeModalButton = document.getElementById('closeModalButton');
+            const modalImg = document.getElementById('modal-img');
+            const modalTitle = document.getElementById('modal-title');
+            const modalTechTags = document.getElementById('modal-tech-tags');
+            const modalLongDescription = document.getElementById('modal-long-description');
+            const modalPlayLink = document.getElementById('modal-play-link');
+            const modalCodeLink = document.getElementById('modal-code-link');
+
+            // --- Populate Game Cards ---
+            games.forEach(game => {
+                const card = document.createElement('div');
+                card.classList.add('game-card');
+                card.setAttribute('data-game-id', game.id);
+
+                let techHtml = '';
+                game.technologies.slice(0, 3).forEach(tech => { // Show max 3 techs on card
+                    techHtml += `<span class="tag">${tech}</span>`;
+                });
+
+                card.innerHTML = `
+                    <img src="${game.thumbnail}" alt="${game.title} Screenshot">
+                    <div class="game-card-content">
+                        <div>
+                            <h3>${game.title}</h3>
+                            <p>${game.shortDescription}</p>
+                        </div>
+                        <div class="tech-tags">
+                            ${techHtml}
+                        </div>
+                    </div>
+                `;
+                card.addEventListener('click', () => openModal(game));
+                gamesGrid.appendChild(card);
+            });
+
+            // --- Modal Functionality ---
+            function openModal(game) {
+                modalImg.src = game.thumbnail; // Or you could have a dedicated larger modal image
+                modalImg.alt = `${game.title} Screenshot`;
+                modalTitle.textContent = game.title;
+                
+                modalTechTags.innerHTML = ''; // Clear previous tags
+                game.technologies.forEach(tech => {
+                    const tagSpan = document.createElement('span');
+                    tagSpan.classList.add('tag');
+                    tagSpan.textContent = tech;
+                    modalTechTags.appendChild(tagSpan);
+                });
+
+                modalLongDescription.innerHTML = game.longDescription.replace(/\n/g, '<br>'); // Preserve line breaks if any
+                modalPlayLink.href = game.playLink;
+                modalCodeLink.href = game.codeLink;
+
+                modal.classList.add('show');
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            }
+
+            function closeModal() {
+                modal.classList.remove('show');
+                document.body.style.overflow = 'auto'; // Restore scrolling
+            }
+
+            closeModalButton.addEventListener('click', closeModal);
+            
+            // Close modal if user clicks outside of the modal content
+            window.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            // Close modal with Escape key
+            window.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && modal.classList.contains('show')) {
+                    closeModal();
+                }
+            });
+
+            // --- Footer Year ---
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+        });
+    </script>
+</body>
+</html>
