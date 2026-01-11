@@ -29,10 +29,20 @@ document.addEventListener('DOMContentLoaded', () => {
           title: 'Dice Roller',
           thumbnail: 'https://i.ibb.co/99zBgwjG/IMG-0001.png',
           shortDescription: 'Test your luck and your nerve with this simulation, where you pick the odds!',
-          longDescription: `Welcome to 'Dice Tycoon,' where fortune favors the bold (and lucky!). This isn't your average gambling simulator; here, you get to choose the odds. Up the risk to up the reward! How much can you make - without losing it all?`,
+          longDescription: `Welcome to 'Dice Roller,' where fortune favors the bold (and lucky!). This isn't your average gambling simulator; here, you get to choose the odds. Up the risk to up the reward! How much can you make - without losing it all?`,
           playLink: 'https://aarongkr.github.io/dice-game/',
           codeLink: 'https://github.com/aarongkr/dice-game',
           technologies: ['HTML', 'CSS', 'JavaScript']
+      },
+      {
+          id: 'fps-game',
+          title: 'WIP - FPS Game',
+          thumbnail: 'https://i.ibb.co/j97RpvVp/Screenshot-2026-01-11-104909.png',
+          shortDescription: 'My first time working in 3D, trying to make a ".io-style" fps game',
+          longDescription: 'An extended personal project of mine working out how to use various technologies such as THREE.js adnd the Rapier physics engine to diversify my skillset and test myself. Eventually 2 players will be pitted against each other in a dense city map and the last one standing wins in this tournament-style knockout game',
+          playLink: 'https://aarongkr.github.io/fps-game/',
+          codeLink: 'https://github.com/aarongkr/fps-game',
+          technologies: ['JavaScript', 'THREE.js', 'Rapier physics engine']
       }
       // Add more game objects here following the same structure
       /*
